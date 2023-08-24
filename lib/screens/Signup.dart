@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:chat_app/resources/auth.dart';
+import 'package:chat_app/screens/login.dart';
 import 'package:chat_app/screens/mobilescreen.dart';
 import 'package:chat_app/utils/utils.dart';
 import 'package:chat_app/widgets/textfield.dart';
@@ -136,16 +137,21 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Already have an account?',
                     style: TextStyle(
                         color: kprimarycolor, fontWeight: FontWeight.w400),
                   ),
-                  Text(
-                    '  Log in',
-                    style: TextStyle(
-                        color: kprimarycolor, fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen())),
+                    child: const Text(
+                      '  Log in',
+                      style: TextStyle(
+                          color: kprimarycolor, fontWeight: FontWeight.bold),
+                    ),
                   )
                 ],
               )

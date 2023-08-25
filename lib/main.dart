@@ -1,9 +1,11 @@
 import 'package:chat_app/screens/Signup.dart';
 import 'package:chat_app/screens/login.dart';
+import 'package:chat_app/screens/mobilescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/widgets/colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,7 @@ Future<void> main() async {
             storageBucket: "chatapp-a234b.appspot.com",
             messagingSenderId: "767114857877",
             appId: "1:767114857877:web:f8ef6ea50dc2d5493a3a9c"));
-  }else{
+  } else {
     await Firebase.initializeApp();
   }
   runApp(const MyApp());
@@ -29,12 +31,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chat App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: const LoginScreen(),
-    );
+        title: 'Chat App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: kprimarycolor,
+                ),
+              );
+            }
+            return const MobileScreen();
+          },
+        ));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:chat_app/screens/userlist.dart';
 import 'package:flutter/material.dart';
 
 class MobileScreen extends StatefulWidget {
@@ -11,9 +12,7 @@ class _MobileScreenState extends State<MobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Main Screen!!'),
-      ),
+      body: UserList()
     );
   }
 }

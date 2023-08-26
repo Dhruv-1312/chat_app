@@ -23,8 +23,9 @@ class ChatServices extends ChangeNotifier {
         .doc(Chatroomid)
         .collection('Messages')
         .add(newmessage.toJason());
+  }
 
-    Stream<QuerySnapshot> getMessage(String userid, String otheruserid) {
+   Stream<QuerySnapshot>getMessage(String userid, String otheruserid) {
       List<String> ids = [userid, otheruserid];
       ids.sort();
       String roomid = ids.join('_');
@@ -35,5 +36,4 @@ class ChatServices extends ChangeNotifier {
           .orderBy('timestamp', descending: false)
           .snapshots();
     }
-  }
 }
